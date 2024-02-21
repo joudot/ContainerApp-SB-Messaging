@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS builder
+WORKDIR /app
+
+COPY . .
+RUN dotnet restore "DemoSbJob/DemoSbJob.csproj"
+
+WORKDIR "/app/."
+COPY . .
+RUN dotnet publish "DemoSbJob/DemoSbJob.csproj" -c Release -o /app/publish
+
+# Stage 2
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=builder /app/publish .
+
+ENTRYPOINT ["dotnet", "DemoSbJob.dll"]

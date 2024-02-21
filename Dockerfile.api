@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS builder
+WORKDIR /app
+
+COPY . .
+RUN dotnet restore "ServiceBusWriterAPI/ServiceBusWriterAPI.csproj"
+
+WORKDIR "/app/."
+COPY . .
+RUN dotnet publish "ServiceBusWriterAPI/ServiceBusWriterAPI.csproj" -c Release -o /app/publish
+
+# Stage 2
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=builder /app/publish .
+# Expose port 9000
+ENV ASPNETCORE_URLS http://+:9000
+EXPOSE 9000
+ENTRYPOINT ["dotnet", "ServiceBusWriterAPI.dll"]

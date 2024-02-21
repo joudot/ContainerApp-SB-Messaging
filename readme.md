@@ -27,10 +27,12 @@ docker run -d demo-sb-worker:1.0
 docker run -d -p 8080:9000 demo-sb-writer:1.0
 ```
 # Cloud Deployment
-Deploy resources.biceps file to make sure the supporting infrastructure exist(e.g. the container registry, container app environment, ...) 
+Deploy the ''resources.bicep'' file to make sure the supporting infrastructure exists (e.g. the container registry, container app environment, ...) 
 ```
 az group create --name juoudot-sb-aca-rg --location "West Europe"
 ```
+
+
 
 Tag the Container image before pushing it to the container registry
 ```
@@ -43,9 +45,7 @@ docker tag demo-sb-worker:1.0 juoudotsbsampleacr.azurecr.io/demo-sb-worker:1.0
 docker tag demo-sb-writer:1.0 juoudotsbsampleacr.azurecr.io/demo-sb-writer:1.0
 ```
 
-```
-az deployment group create --name joudot-deployment --resource-group juoudot-sb-aca-rg --template-file .\Deploy\resources.bicep
-```
+
 Push the container previously tagged
 ```
 docker login juoudotsbsampleacr.azurecr.io -u juoudotsbsampleacr

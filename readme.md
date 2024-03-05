@@ -3,7 +3,7 @@ This project is composed of 3 main components:
 - An ASP.NET Core API that will send/write message into two Service Bus Queues: 1 that will be read by jobs started in Container Apps (i.e. 1 job per message), 1 that will be read by a worker that keeps on reading new messages in a loop
 - A Console application that will read messages in a loop. This is meant to be hosted as a Container App 
 - A Console application that will read a single message. This is meant to be hosted as a Container App Job
-- 
+ 
 You will find below the architecture of this sample.
 ![](Img/Architecture.png)
 

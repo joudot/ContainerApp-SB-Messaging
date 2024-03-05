@@ -78,11 +78,14 @@ Then, check that the message is properly pushed/processed looking at logs.
 
 # (Optional) Configure a basic Load Testing 
 From the Azure Load Test enironment, create a new URL based test
+![](Img/CreateLoadTest.png)
 
 ![](Img/UrlBasedTestUrlBasedTest.png)
 
 Then, make sure you add the right resources to monitor during the load testing
 ![](Img/AddResourcesToMonitor.png)
+
+You could create one load test per API call (Job vs Apps) to compare how both would scale in the backend. 
 
 # Cleaning
 Clean by removing the whole resource group 
